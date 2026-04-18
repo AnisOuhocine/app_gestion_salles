@@ -23,3 +23,14 @@ class DataSalle:
         con.commit()
         curseur.close()
         con.close()
+
+    def delete_salle(self, code):
+        con = self.get_connection()
+        curseur = con.cursor()
+
+        requete = "DELETE FROM salle WHERE code = %s"
+        curseur.execute(requete, (code,))
+        con.commit()
+        curseur.close()
+        con.close()
+
