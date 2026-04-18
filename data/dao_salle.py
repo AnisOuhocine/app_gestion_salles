@@ -45,5 +45,18 @@ class DataSalle:
         curseur.close()
         con.close()
 
+    def get_salle(self, code):
+        con = self.get_connection()
+        curseur = con.cursor()
 
+        requete= "SELECT * FROM salle WHERE code = %s"
+        curseur.execute(requete,(code,))
+        resultat=curseur.fetchone()
 
+        curseur.close()
+        con.close()
+
+        if resultat :
+            return Salle(resultat[0],resultat[1],resultat[2],resultat[3])
+        else:
+            return None
