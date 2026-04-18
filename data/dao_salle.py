@@ -60,3 +60,20 @@ class DataSalle:
             return Salle(resultat[0],resultat[1],resultat[2],resultat[3])
         else:
             return None
+
+
+    def get_salle(self):
+        con = self.get_connection()
+        curseur = con.cursor()
+
+        requete = "SELECT *FROM salle"
+        curseur.execute(requete)
+        resultats = curseur.fetchall()
+        curseur.close()
+        con.close()
+        liste_salle=[]
+        for ligne in resultats :
+            salle = Salle(ligne[0],ligne[1],ligne[2],ligne[3])
+            liste_salle.append(salle)
+
+        return liste_salle
