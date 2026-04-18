@@ -1,7 +1,12 @@
 # fichier en préparation
 # Etape 3 : Initialisation de l architecture en couches et installation des dependances
 
-from models.salle import Salle
+from data.dao_salle import DataSalle
 
-s1 = Salle("S1", "Salle info", "Laboratoire", 30)
-s1.afficher_infos()
+dao = DataSalle()
+connexion = dao.get_connection()
+print(connexion)
+
+if connexion.is_connected():
+    print("Connexion réussie")
+    connexion.close()
