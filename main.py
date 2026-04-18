@@ -1,44 +1,33 @@
-# fichier en préparation
-# Etape 3 : Initialisation de l architecture en couches et installation des dependances
-
-from data.dao_salle import DataSalle
+from services.service_salle import ServiceSalle
 from models.salle import Salle
 
-dao = DataSalle()
+service = ServiceSalle()
 
-# Test connexion
-connexion = dao.get_connection()
-if connexion.is_connected():
-    print("Connexion réussie")
-connexion.close()
-
-# Nettoyage avant test
-dao.delete_salle("S101")
+#Nettoyge avant teste pour ne pas avoir des erreurs
+service.supprimer_salle("S200")
 
 # Test ajout
-s1 = Salle("S101", "Salle programmation", "Laboratoire", 20)
-dao.insert_salle(s1)
-print("Salle ajoutée")
+s1 = Salle("S200", "Salle test", "Classe", 10)
+success, message = service.ajouter_salle(s1)
 
-#test recherche
-salle = dao.get_salle("S101")
-if salle is not None:
-    print("Salle trouvée :")
-    salle.afficher_infos()
+print(message)
 
-#Test modification
-s2 = Salle("S101", "Salle programmation avancee", "Laboratoire", 35)
-dao.update_salle(s2)
-print("Salle modifiée")
-
-# Test affichage de toutes les salles
-liste = dao.get_salles()
-print("Liste des salles :")
+# Test affichage
+liste = service.recuperer_salles()
 for s in liste:
     s.afficher_infos()
-    print("----------------")
+    print("------")
+
+# Test modification
+s2 = Salle("S200", "Salle test modifiee", "Classe", 20)
+success, message = service.modifier_salle(s2)
+print(message)
+
+# Test recherche
+salle = service.rechercher_salle("S200")
+if salle:
+    salle.afficher_infos()
 
 # Test suppression
-dao.delete_salle("S101")
+service.supprimer_salle("S200")
 print("Salle supprimée")
-
