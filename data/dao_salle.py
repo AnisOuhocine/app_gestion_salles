@@ -62,7 +62,7 @@ class DataSalle:
             return None
 
 
-    def get_salle(self):
+    def get_salles(self):
         con = self.get_connection()
         curseur = con.cursor()
 
@@ -71,9 +71,9 @@ class DataSalle:
         resultats = curseur.fetchall()
         curseur.close()
         con.close()
-        liste_salle=[]
+        liste_salles=[]
         for ligne in resultats :
             salle = Salle(ligne[0],ligne[1],ligne[2],ligne[3])
-            liste_salle.append(salle)
+            liste_salles.append(salle)
 
-        return liste_salle
+        return liste_salles
