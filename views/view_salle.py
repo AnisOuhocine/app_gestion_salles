@@ -45,7 +45,7 @@ class ViewSalle(ctk,CTk):
         self.btn_modifier = ctk.CTkButton(self.cadreActions, text="Modifier", command=self.modifier_salle)
         self.btn_modifier.grid(row=0, column=1, padx=10, pady=10)
 
-        self.btn_supprimer = ctk.CTkButton(self.cadreActions, text="Supprimer")
+        self.btn_supprimer = ctk.CTkButton(self.cadreActions, text="Supprimer", command=self.supprimer_salle)
         self.btn_supprimer.grid(row=0, column=2, padx=10, pady=10)
 
         self.btn_rechercher = ctk.CTkButton(self.cadreActions, text="Rechercher")
@@ -98,6 +98,18 @@ class ViewSalle(ctk,CTk):
 
         else:
             messagebox.showerror("Erreur", message)
+
+    def supprimer_salle(self):
+        code = self.entry_code.get()
+
+        if code == "":
+            messagebox.showerror("Erreur", "Le code est obligatoire")
+            return
+
+        self.service_salle.supprimer_salle(code)
+        messagebox.showinfo("Succès", "Salle supprimée")
+        self.vider_champs()
+
 
 
 
