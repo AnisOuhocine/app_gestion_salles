@@ -12,3 +12,26 @@ class ViewSalle(ctk,CTk):
         self.service_salle = ServiceSalle()
         self.title("Gestion des salles")
         self.geometry ("700x400")
+
+        self.cadreInfos = ctk.CTkFrame(self,corner_radius=10)
+        self.cadreInfos.pack(pady=10, padx=10,fill="x")
+
+        self.label_code = ctk.CTkLabel(self.cadreInfos, text="Code salle")
+        self.label_code.grid(row=0, column=0, padx=10, pady=10)
+        self.entry_code = ctk.CTkEntry(self.cadreInfos)
+        self.entry_code.grid(row=0, column=1, padx=10, pady=10)
+
+        self.label_libelle = ctk.CTkLabel(self.cadreInfos, text="Libellé")
+        self.label_libelle.grid(row=1, column=0, padx=10, pady=10)
+        self.entry_libelle = ctk.CTkEntry(self.cadreInfos)
+        self.entry_libelle.grid(row=1, column=1, padx=10, pady=10)
+
+        self.label_type = ctk.CTkLabel(self.cadreInfos, text="Type")
+        self.label_type.grid(row=2, column=0, padx=10, pady=10)
+        self.entry_type = ctk.CTkEntry(self.cadreInfos)
+        self.entry_type.grid(row=2, column=1, padx=10, pady=10)
+
+        self.label_capacite = ctk.CTkLabel(self.cadreInfos, text="Capacité")
+        self.label_capacite.grid(row=3, column=0, padx=10, pady=10)
+        self.entry_capacite = ctk.CTkEntry(self.cadreInfos)
+        self.entry_capacite.grid(row=3, column=1, padx=10, pady=10)
