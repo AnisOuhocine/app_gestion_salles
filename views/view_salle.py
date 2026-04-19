@@ -5,7 +5,7 @@ from tkinter import messagebox
 from services.service_salle import ServiceSalle
 from models.salle import Salle
 
-class ViewSalle(ctk,CTk):
+class ViewSalle(ctk.CTk):
     def __init__(self):
         super().__init__()
 
@@ -48,7 +48,7 @@ class ViewSalle(ctk,CTk):
         self.btn_supprimer = ctk.CTkButton(self.cadreActions, text="Supprimer", command=self.supprimer_salle)
         self.btn_supprimer.grid(row=0, column=2, padx=10, pady=10)
 
-        self.btn_rechercher = ctk.CTkButton(self.cadreActions, text="Rechercher")
+        self.btn_rechercher = ctk.CTkButton(self.cadreActions, text="Rechercher", command=self.rechercher_salle)
         self.btn_rechercher.grid(row=0, column=3, padx=10, pady=10)
 
     def vider_champs(self):
@@ -109,6 +109,34 @@ class ViewSalle(ctk,CTk):
         self.service_salle.supprimer_salle(code)
         messagebox.showinfo("Succès", "Salle supprimée")
         self.vider_champs()
+
+    def rechercher_salle (self):
+        code = self.entry_code.get()
+
+        if code == "":
+            messagebox.showerror("Erreur", "Le code est obligatoire")
+            return
+        salle = self.service_salle.rechercher_salle(code)
+
+
+        if salle is not None:
+            self.entry_libelle.delete(0, "end")
+            self.entry_libelle.insert(0, salle.libelle)
+
+            self.entry_type.delete(0, "end")
+            self.entry_type.insert(0, salle.type)
+
+            self.entry_capacite.delete(0, "end")
+            self.entry_capacite.insert(0, str(salle.capacite))
+
+        else:
+                 messagebox.showerror("Erreur", "Salle introuvable")
+
+
+
+
+
+
 
 
 
