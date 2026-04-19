@@ -52,6 +52,29 @@ class ViewSalle(ctk.CTk):
         self.btn_rechercher = ctk.CTkButton(self.cadreActions, text="Rechercher", command=self.rechercher_salle)
         self.btn_rechercher.grid(row=0, column=3, padx=10, pady=10)
 
+        self.cadreList = ctk.CTkFrame(self,corner_radius=10,width=400)
+        self.cadreList.pack(pady=10, padx=10,fill="both",expand=True)
+
+        self.treeList = ttk.Treeview(
+            self.cadreList,
+            columns=("code", "libelle", "type", "capacite"),
+            show="headings"
+        )
+
+        self.treeList.heading("code", text="CODE")
+        self.treeList.heading("libelle", text="LIBELLÉ")
+        self.treeList.heading("type", text="TYPE")
+        self.treeList.heading("capacite", text="CAPACITÉ")
+
+        self.treeList.column("code", width=80)
+        self.treeList.column("libelle", width=180)
+        self.treeList.column("type", width=120)
+        self.treeList.column("capacite", width=100)
+
+        self.treeList.pack(expand=True, fill="both", padx=10, pady=10)
+
+
+
     def vider_champs(self):
         self.entry_code.delete(0, "end")
         self.entry_libelle.delete(0, "end")
