@@ -72,6 +72,7 @@ class ViewSalle(ctk.CTk):
         self.treeList.column("capacite", width=100)
 
         self.treeList.pack(expand=True, fill="both", padx=10, pady=10)
+        self.lister_salles()
 
 
 
@@ -80,6 +81,15 @@ class ViewSalle(ctk.CTk):
         self.entry_libelle.delete(0, "end")
         self.entry_type.delete(0, "end")
         self.entry_capacite.delete(0, "end")
+
+    def lister_salles(self):
+
+        self.treeList.delete(*self.treeList.get_children())
+        liste = self.service_salle.recuperer_salles()
+
+        for s in liste :
+            self.treeList.insert("", "end", values=(s.code, s.libelle, s.type, s.capacite))
+
 
     def ajouter_salle(self):
         code = self.entry_code.get()
