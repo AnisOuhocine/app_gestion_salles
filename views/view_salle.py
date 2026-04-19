@@ -39,7 +39,7 @@ class ViewSalle(ctk,CTk):
         self.cadreActions = ctk.CTkFrame(self,corner_radius=10)
         self.cadreActions.pack(pady=10,padx=10, fill="x")
 
-        self.btn_ajouter = ctk.CTkButton(self.cadreActions, text="Ajouter")
+        self.btn_ajouter = ctk.CTkButton(self.cadreActions, text="Ajouter", command=self.ajouter_salle)
         self.btn_ajouter.grid(row=0, column=0, padx=10, pady=10)
 
         self.btn_modifier = ctk.CTkButton(self.cadreActions, text="Modifier")
@@ -56,5 +56,28 @@ class ViewSalle(ctk,CTk):
         self.entry_libelle.delete(0, "end")
         self.entry_type.delete(0, "end")
         self.entry_capacite.delete(0, "end")
+
+    def ajouter_salle(self):
+        code = self.entry_code.get()
+        libelle = self.entry_libelle.get()
+        type_salle = self.entry_type.get()
+        capacite_texte = self.entry_capacite.get()
+
+        try:
+            capacite = int(capacite_texte)
+        except:
+            messagebox.showerror("Erreur", "La capacité doit être un entier")
+            return
+        salle = Salle(code, libelle, type_salle, capacite)
+        success, message = self.service_salle.ajouter_salle(salle)
+
+        if success:
+            messagebox.showinfo("Succès", message)
+            self.vider_champs()
+        else:
+            messagebox.showerror("Erreur", message)
+
+
+
 
 
