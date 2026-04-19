@@ -108,6 +108,7 @@ class ViewSalle(ctk.CTk):
         if success:
             messagebox.showinfo("Succès", message)
             self.vider_champs()
+            self.lister_salles()
         else:
             messagebox.showerror("Erreur", message)
 
