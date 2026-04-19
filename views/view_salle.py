@@ -2,6 +2,7 @@
 
 import customtkinter as ctk
 from tkinter import messagebox
+from tkinter import ttk
 from services.service_salle import ServiceSalle
 from models.salle import Salle
 
